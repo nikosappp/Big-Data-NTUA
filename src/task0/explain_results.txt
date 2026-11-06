@@ -1,3 +1,45 @@
+WITHOUT EXPLAIN
+
+
+Starting Scenario 1: JSON with Schema Inference
+Scenario 1 finished in: 142.54 seconds
+
+Starting Scenario 2: JSON with Explicit Schema
+Scenario 2 finished in: 67.39 seconds
+
+Starting Scenario 3: Parquet (Partitioned)
+Scenario 3 finished in: 24.75 seconds
+
+Verifying Output Correctness
+All 3 scenarios produced identical mathematical results!
+
+Average Stars per Year:
+Year 2005: 3.90 stars
+Year 2006: 4.00 stars
+Year 2007: 3.86 stars
+Year 2008: 3.80 stars
+Year 2009: 3.72 stars
+Year 2010: 3.72 stars
+Year 2011: 3.70 stars
+Year 2012: 3.68 stars
+Year 2013: 3.68 stars
+Year 2014: 3.72 stars
+Year 2015: 3.74 stars
+Year 2016: 3.77 stars
+Year 2017: 3.78 stars
+Year 2018: 3.78 stars
+Year 2019: 3.77 stars
+Year 2020: 3.78 stars
+Year 2021: 3.70 stars
+Year 2022: 3.70 stars
+
+
+
+
+
+WITH EXPLAIN
+
+
 
 Starting Scenario 1: JSON with Schema Inference
 == Physical Plan ==
@@ -9,7 +51,7 @@ AdaptiveSparkPlan isFinalPlan=false
             +- FileScan json [date#8,stars#11] Batched: false, DataFilters: [], Format: JSON, Location: InMemoryFileIndex(1 paths)[file:/home/nikolaos/advdb/raw/yelp_academic_dataset_review.json], PartitionFilters: [], PushedFilters: [], ReadSchema: struct<date:string,stars:double>
 
 
-Scenario 1 finished in: 105.73 seconds
+Scenario 1 finished in: 247.94 seconds
 
 Starting Scenario 2: JSON with Explicit Schema
 == Physical Plan ==
@@ -21,7 +63,7 @@ AdaptiveSparkPlan isFinalPlan=false
             +- FileScan json [stars#42,date#47] Batched: false, DataFilters: [], Format: JSON, Location: InMemoryFileIndex(1 paths)[file:/home/nikolaos/advdb/raw/yelp_academic_dataset_review.json], PartitionFilters: [], PushedFilters: [], ReadSchema: struct<stars:double,date:string>
 
 
-Scenario 2 finished in: 15.12 seconds
+Scenario 2 finished in: 90.73 seconds
 
 Starting Scenario 3: Parquet (Partitioned)
 == Physical Plan ==
@@ -32,7 +74,7 @@ AdaptiveSparkPlan isFinalPlan=false
          +- FileScan parquet [stars#75,year#81] Batched: true, DataFilters: [], Format: Parquet, Location: InMemoryFileIndex(1 paths)[file:/home/nikolaos/advdb/parquet/yelp_review.parquet], PartitionFilters: [], PushedFilters: [], ReadSchema: struct<stars:double>
 
 
-Scenario 3 finished in: 4.47 seconds
+Scenario 3 finished in: 19.51 seconds
 
 Verifying Output Correctness
 All 3 scenarios produced identical mathematical results!

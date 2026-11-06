@@ -4,6 +4,7 @@ from pyspark.sql.types import (
     StructType, StructField, StringType, DoubleType, 
     IntegerType, MapType
 )
+from pyspark.sql.functions import expr
 
 # 1. Initialize Spark Session
 spark = SparkSession.builder \
@@ -33,6 +34,12 @@ business_schema = StructType([
 
 print("--> Reading business.json with explicit schema...")
 df_business = spark.read.schema(business_schema).json(f"{raw_dir}/yelp_academic_dataset_business.json")
+
+df_business = (
+    df_business
+    .withColumn("attributes", expr("parse_json(attributes)"))
+    .withColumn("hours", expr("parse_json(hours)"))
+)
 
 print("--> Writing to Parquet format...")
 df_business.write.mode("overwrite").parquet(f"{out_dir}/yelp_business.parquet")
